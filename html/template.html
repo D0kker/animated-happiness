@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+          <!-- Bootstrap CSS -->
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+          <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <!-- Option 1: Bootstrap Bundle with Popper -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+      
+          <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+      <style type="text/css">
+      .odd {
+        background: rgba(0, 0, 0, .05);
+      }
+    </style>
+  </head>
+  <body class="pt-5">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top shadow-sm">
+      <div class="container">
+        <a class="navbar-brand" href="">
+          <span class="text-light">{{title}}</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="container my-5">
+      <div class="my-4">
+        <div>
+          <strong>Fecha inicial:</strong> {{date_start}}
+        </div>
+
+        <div>
+          <strong>Fecha final:</strong> {{date_end}}
+        </div>
+      </div>
+
+      <h2>Módulos</h2>
+
+      <!-- <table class="table table-striped">
+        <thead class="bg-primary text-light">
+          <tr>
+            <th>Categoría</th>
+            <th class="text-right">Total</th>
+          </tr>
+        </thead>
+
+        <tfoot class="bg-secondary text-light font-weight-bold">
+          <tr>
+            <td>Total</td>
+            <td class="text-right">{{mod_total}}</td>
+          </tr>
+        </tfoot>
+
+        <tbody>
+          <tr>
+            <td>Front end</td>
+            <td class="text-right">{{mod_front}}</td>
+          </tr>
+          <tr>
+            <td>Back end</td>
+            <td class="text-right">{{mod_back}}</td>
+          </tr>
+        </tbody>
+      </table> -->
+      <ul class="list-group list-group-horizontal">
+        <li class="list-group-item">Front end <span class="badge bg-secondary">{{mod_front}}</span></li>
+        <li class="list-group-item">Back end <span class="badge bg-secondary">{{mod_back}}</span></li>
+        <li class="list-group-item">Total <span class="badge bg-secondary">{{mod_total}}</span></li>
+      </ul>
+      <!-- <h2 class="mt-5">Código</h2>
+
+      <table class="table table-striped">
+        <thead class="bg-primary text-light">
+          <tr>
+            <th>#</th>
+            <th>Lenguaje</th>
+            <th>Tipo</th>
+            <th class="text-right">Archivos</th>
+            <th class="text-right">Líneas en blanco</th>
+            <th class="text-right">Comentarios</th>
+            <th class="text-right">Código</th>
+            <th class="text-right">Total</th>
+          </tr>
+        </thead>
+
+        <tfoot class="bg-secondary text-light font-weight-bold">
+          <tr>
+            <td colspan="3">Total</td>
+            <td class="text-right">{{loc_total_files}}</td>
+            <td class="text-right">{{loc_total_blank}}</td>
+            <td class="text-right">{{loc_total_comment}}</td>
+            <td class="text-right">{{loc_total_code}}</td>
+            <td class="text-right">{{loc_total_total_lang}}</td>
+          </tr>
+        </tfoot>
+
+        <tbody>{{loc_rows}}</tbody>
+      </table> -->
+
+      <!-- <h2 class="mt-5">Código de Clientes de Servicios</h2>
+
+      <table class="table table-striped">
+        <thead class="bg-primary text-light">
+          <tr>
+            <th>#</th>
+            <th>Lenguaje</th>
+            <th>Tipo</th>
+            <th class="text-right">Archivos</th>
+            <th class="text-right">Líneas en blanco</th>
+            <th class="text-right">Comentarios</th>
+            <th class="text-right">Código</th>
+            <th class="text-right">Total</th>
+          </tr>
+        </thead>
+
+        <tfoot class="bg-secondary text-light font-weight-bold">
+          <tr>
+            <td colspan="3">Total</td>
+            <td class="text-right">{{loc_services_total_files}}</td>
+            <td class="text-right">{{loc_services_total_blank}}</td>
+            <td class="text-right">{{loc_services_total_comment}}</td>
+            <td class="text-right">{{loc_services_total_code}}</td>
+            <td class="text-right">{{loc_services_total_total_lang}}</td>
+          </tr>
+        </tfoot>
+
+        <tbody>{{loc_services_rows}}</tbody>
+      </table> -->
+
+      <!-- <h2 class="mt-5">GitLab</h2>
+
+      <table class="table table-striped">
+        <thead class="bg-primary text-light">
+          <tr>
+            <th>#</th>
+            <th>Desarrollador</th>
+            <th class="text-right">Merge Requests Aprobados</th>
+            <th class="text-right">Merge Requests Cerrados</th>
+          </tr>
+        </thead>
+
+        <tfoot class="bg-secondary text-light font-weight-bold">
+          <tr>
+            <td colspan="2">Total</td>
+            <td class="text-right">{{gitlab_total_merged}}</td>
+            <td class="text-right">{{gitlab_total_closed}}</td>
+          </tr>
+        </tfoot>
+
+        <tbody>{{gitlab_rows}}</tbody>
+      </table> -->
+
+      <h2 class="mt-5">SonarQube - Medidas</h2>
+
+      <table class="table table-striped">
+        <thead class="bg-primary text-light">
+          <tr>
+            <th>#</th>
+            <th>Proyecto</th>
+            <th class="text-right">Files</th>
+            <th class="text-right">Unit Test</th>
+            <th class="text-right">Covertura (%)</th>
+            <th class="text-right">Code Smells</th>
+            <th class="text-right">Bugs</th>
+            <th class="text-right">Vulnerabilidades</th>
+          </tr>
+        </thead>
+
+        <tfoot class="bg-secondary text-light font-weight-bold">
+          <tr>
+            <td colspan="2">Total</td>
+            {{sonar_measures}}
+            <!-- <th class="text-right">{{sonar_measures_total_files}}</th>
+            <th class="text-right">{{sonar_measures_total_coverage}}</th>
+            <th class="text-right">{{sonar_measures_total_code_smells}}</th>
+            <th class="text-right">{{sonar_measures_total_bugs}}</th>
+            <th class="text-right">{{sonar_measures_total_vulnerabilities}}</th> -->
+          </tr>
+        </tfoot>
+
+        <tbody>{{sonar_measures_rows}}</tbody>
+      </table>
+
+      <h2 class="mt-5">SonarQube - Complejidades</h2>
+
+      <table class="table">
+        <thead class="bg-primary text-light">
+          <tr>
+            <th>#</th>
+            <th>Componente</th>
+            <th class="text-right">Métodos</th>
+            <th class="text-right">Cyclomatic</th>
+            <th class="text-right">Cyclomatic Promedio</th>
+            <th class="text-right">Cognitive</th>
+            <th class="text-right">Cognitive Promedio</th>
+          </tr>
+        </thead>
+
+        <tfoot class="bg-secondary text-light font-weight-bold">
+          <tr>
+            <td colspan="2">Total</td>
+            {{sonar_complexities}}
+            <!-- <th class="text-right">{{sonar_complexities_total_methods}}</th>
+            <th class="text-right">{{sonar_complexities_total_cyclomatic}}</th>
+            <th class="text-right">{{sonar_complexities_total_cyclomatic_avg}}</th>
+            <th class="text-right">{{sonar_complexities_total_cognitive}}</th>
+            <th class="text-right">{{sonar_complexities_total_cognitive_avg}}</th> -->
+          </tr>
+        </tfoot>
+
+        <tbody>{{sonar_complexities_rows}}</tbody>
+      </table>
+    </div>
+  </body>
+</html>
