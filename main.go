@@ -2,9 +2,6 @@ package main
 
 import (
 	"cualquier_vaina/sonarqube"
-	vehiculo_model "cualquier_vaina/vehiculo"
-	acuatico_model "cualquier_vaina/vehiculo/acuatico"
-	aereo_model "cualquier_vaina/vehiculo/aereo"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -21,11 +18,6 @@ func check(e error) {
 }
 
 func main() {
-	x := vehiculo_model.Detalle{Nombre: "fgsssss", Color: "rojo"}
-	w := acuatico_model.DetalleAcuatico{Nombre: aereo_model.R.Nombre, Color: "rojo"}
-	x.Response()
-	w.Response()
-
 	port := 1515
 
 	http.HandleFunc("/helloworld", helloWorldHandler)
@@ -71,6 +63,7 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
 	var functionsT int
 	var cognitiveComplexityT int
 	var complexityT int
+
 	for index, element := range bb.Components {
 		var files string
 		var coverage string
@@ -81,6 +74,7 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
 		var functions string
 		var cognitiveComplexity string
 		var complexity string
+
 		for i := range element.Component.Measures {
 			if element.Component.Measures[i].Metric == "bugs" {
 				bugs = element.Component.Measures[i].Value
@@ -144,7 +138,6 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
 
 	er2 := ioutil.WriteFile("test.html", []byte(data), 0644)
 	check(er2)
-	// f, err := os.Create("test.html")
-	// _, err2 := f.WriteString(tmpl)
+
 	fmt.Fprint(w, "READY")
 }
