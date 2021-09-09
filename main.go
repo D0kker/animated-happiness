@@ -2,9 +2,6 @@ package main
 
 import (
 	"cualquier_vaina/sonarqube"
-	vehiculo_model "cualquier_vaina/vehiculo"
-	acuatico_model "cualquier_vaina/vehiculo/acuatico"
-	aereo_model "cualquier_vaina/vehiculo/aereo"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -21,11 +18,6 @@ func check(e error) {
 }
 
 func main() {
-	x := vehiculo_model.Detalle{Nombre: "fgsssss", Color: "rojo"}
-	w := acuatico_model.DetalleAcuatico{Nombre: aereo_model.R.Nombre, Color: "rojo"}
-	x.Response()
-	w.Response()
-
 	port := 1515
 
 	http.HandleFunc("/helloworld", helloWorldHandler)
