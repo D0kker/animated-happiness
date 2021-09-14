@@ -39,7 +39,7 @@ func (box *ProjectList) AddItem(item Components) []Components {
 	return box.Projects
 }
 
-func GetAllModules(w http.ResponseWriter, r *http.Request) ProjectListModules {
+func GetAllModules(w http.ResponseWriter, r *http.Request, project string) ProjectListModules {
 	var bird objGetAllModules
 	items := []Components{}
 	ObjFront := ProjectList{items}
@@ -61,7 +61,7 @@ func GetAllModules(w http.ResponseWriter, r *http.Request) ProjectListModules {
 
 		json.Unmarshal([]byte(responseData), &bird)
 		for _, element := range bird.Components {
-			if strings.Contains(element.Key, "bel:") {
+			if strings.Contains(element.Key, project + ":") {
 				item1 := Components{Key: element.Key, Name: element.Name, Qualifier: element.Qualifier, Project: element.Project}
 				if strings.Contains(element.Key, ":lrf:") {
 					ObjFront.AddItem(item1)
@@ -76,7 +76,7 @@ func GetAllModules(w http.ResponseWriter, r *http.Request) ProjectListModules {
 			break
 		} else {
 			i = i + 1
-		} //fmt.Println(bird.Paging)
+		}
 	}
 
 	fmt.Println(len(ObjFront.Projects))

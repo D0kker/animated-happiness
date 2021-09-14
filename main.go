@@ -20,21 +20,29 @@ func check(e error) {
 func main() {
 	port := 1515
 
-	http.HandleFunc("/helloworld", helloWorldHandler)
+	http.HandleFunc("/test", testHandler)
 	http.HandleFunc("/getAllModules", getAllModules)
 
 	log.Printf("Server starting on port %v\n", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", port), nil))
 }
 
-func helloWorldHandler(w http.ResponseWriter, r *http.Request) {
+func testHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello World\n")
 }
 
 func getAllModules(w http.ResponseWriter, r *http.Request) {
-	xx := sonarqube.GetAllModules(w, r)
+	fmt.Println("Params:", r.URL.Query())
+
+	param1 := r.URL.Query().Get("project")
+  if param1 != "" {
+    fmt.Println("No proporciono el parametro PROJECT")
+  }
+
+  xx := sonarqube.GetAllModules(w, r, param1)
 	var ff sonarqube.MetricsComponentList
 	var bb sonarqube.MetricsComponentList
+	
 	for _, element := range xx.Front.Projects {
 		ff.Components = append(ff.Components, sonarqube.GetMetrics(w, r, element.Key))
 	}
@@ -45,7 +53,6 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
 
 	dat, err := ioutil.ReadFile("html/template.html")
 	check(err)
-	//fmt.Print(string(dat))
 
 	data := strings.ReplaceAll(string(dat), "{{mod_front}}", fmt.Sprint(len(xx.Front.Projects)))
 	data = strings.ReplaceAll(data, "{{mod_back}}", fmt.Sprint(len(xx.Back.Projects)))
