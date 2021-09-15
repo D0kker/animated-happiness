@@ -28,20 +28,20 @@
       </div>
     </nav>
 
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
-      </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-        <div class="container my-5">
+    <div class="container my-5">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
           <div class="my-4">
             <div>
               <strong>Fecha inicial:</strong> {{date_start}}
@@ -57,74 +57,79 @@
             <li class="list-group-item">Front end <span class="badge bg-secondary">{{mod_front}}</span></li>
             <li class="list-group-item">Back end <span class="badge bg-secondary">{{mod_back}}</span></li>
             <li class="list-group-item">Total <span class="badge bg-secondary">{{mod_total}}</span></li>
-          </ul>
+          </ul>   
         </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">      
+          <h2 class="mt-5">SonarQube - Medidas</h2>
+
+          <table class="table table-striped">
+            <thead class="bg-primary text-light">
+              <tr>
+                <th>#</th>
+                <th>Proyecto</th>
+                <th class="text-right">Files</th>
+                <th class="text-right">Unit Test</th>
+                <th class="text-right">Covertura (%)</th>
+                <th class="text-right">Code Smells</th>
+                <th class="text-right">Bugs</th>
+                <th class="text-right">Vulnerabilidades</th>
+              </tr>
+            </thead>
+    
+            <tfoot class="bg-secondary text-light font-weight-bold">
+              <tr>
+                <td colspan="2">Total</td>
+                {{sonar_measures}}
+                <!-- <th class="text-right">{{sonar_measures_total_files}}</th>
+                <th class="text-right">{{sonar_measures_total_coverage}}</th>
+                <th class="text-right">{{sonar_measures_total_code_smells}}</th>
+                <th class="text-right">{{sonar_measures_total_bugs}}</th>
+                <th class="text-right">{{sonar_measures_total_vulnerabilities}}</th> -->
+              </tr>
+            </tfoot>
+    
+            <tbody>{{sonar_measures_rows}}</tbody>
+          </table>
+    
+          <h2 class="mt-5">SonarQube - Complejidades</h2>
+    
+          <table class="table">
+            <thead class="bg-primary text-light">
+              <tr>
+                <th>#</th>
+                <th>Componente</th>
+                <th class="text-right">Métodos</th>
+                <th class="text-right">Cyclomatic</th>
+                <th class="text-right">Cyclomatic Promedio</th>
+                <th class="text-right">Cognitive</th>
+                <th class="text-right">Cognitive Promedio</th>
+              </tr>
+            </thead>
+    
+            <tfoot class="bg-secondary text-light font-weight-bold">
+              <tr>
+                <td colspan="2">Total</td>
+                {{sonar_complexities}}
+                <!-- <th class="text-right">{{sonar_complexities_total_methods}}</th>
+                <th class="text-right">{{sonar_complexities_total_cyclomatic}}</th>
+                <th class="text-right">{{sonar_complexities_total_cyclomatic_avg}}</th>
+                <th class="text-right">{{sonar_complexities_total_cognitive}}</th>
+                <th class="text-right">{{sonar_complexities_total_cognitive_avg}}</th> -->
+              </tr>
+            </tfoot>
+    
+            <tbody>{{sonar_complexities_rows}}</tbody>
+          </table></div>
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
       </div>
-      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+
+
+
+
+
+
     </div>
 
-    <div class="container my-5">
-      <h2 class="mt-5">SonarQube - Medidas</h2>
 
-      <table class="table table-striped">
-        <thead class="bg-primary text-light">
-          <tr>
-            <th>#</th>
-            <th>Proyecto</th>
-            <th class="text-right">Files</th>
-            <th class="text-right">Unit Test</th>
-            <th class="text-right">Covertura (%)</th>
-            <th class="text-right">Code Smells</th>
-            <th class="text-right">Bugs</th>
-            <th class="text-right">Vulnerabilidades</th>
-          </tr>
-        </thead>
-
-        <tfoot class="bg-secondary text-light font-weight-bold">
-          <tr>
-            <td colspan="2">Total</td>
-            {{sonar_measures}}
-            <!-- <th class="text-right">{{sonar_measures_total_files}}</th>
-            <th class="text-right">{{sonar_measures_total_coverage}}</th>
-            <th class="text-right">{{sonar_measures_total_code_smells}}</th>
-            <th class="text-right">{{sonar_measures_total_bugs}}</th>
-            <th class="text-right">{{sonar_measures_total_vulnerabilities}}</th> -->
-          </tr>
-        </tfoot>
-
-        <tbody>{{sonar_measures_rows}}</tbody>
-      </table>
-
-      <h2 class="mt-5">SonarQube - Complejidades</h2>
-
-      <table class="table">
-        <thead class="bg-primary text-light">
-          <tr>
-            <th>#</th>
-            <th>Componente</th>
-            <th class="text-right">Métodos</th>
-            <th class="text-right">Cyclomatic</th>
-            <th class="text-right">Cyclomatic Promedio</th>
-            <th class="text-right">Cognitive</th>
-            <th class="text-right">Cognitive Promedio</th>
-          </tr>
-        </thead>
-
-        <tfoot class="bg-secondary text-light font-weight-bold">
-          <tr>
-            <td colspan="2">Total</td>
-            {{sonar_complexities}}
-            <!-- <th class="text-right">{{sonar_complexities_total_methods}}</th>
-            <th class="text-right">{{sonar_complexities_total_cyclomatic}}</th>
-            <th class="text-right">{{sonar_complexities_total_cyclomatic_avg}}</th>
-            <th class="text-right">{{sonar_complexities_total_cognitive}}</th>
-            <th class="text-right">{{sonar_complexities_total_cognitive_avg}}</th> -->
-          </tr>
-        </tfoot>
-
-        <tbody>{{sonar_complexities_rows}}</tbody>
-      </table>
-    </div>
   </body>
 </html>
