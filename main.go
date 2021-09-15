@@ -40,7 +40,7 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
     fmt.Println("No proporciono el parametro PROJECT")
   }
   if paramBranch == "" {
-    fmt.Println("No proporciono el parametro PROJECT")
+    fmt.Println("No proporciono el parametro BRANCH")
   }
 
   xx := sonarqube.GetAllModules(w, r, paramProject)
@@ -145,7 +145,9 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
 	data = strings.ReplaceAll(data, "{{sonar_complexities_rows}}", sonar_complexities)
 	data = strings.ReplaceAll(data, "{{sonar_complexities}}", sonar_complexitiesT)
 
-	er2 := ioutil.WriteFile("test.html", []byte(data), 0644)
+	//er2 := ioutil.WriteFile("test.html", []byte(data), 0644)
+	er2 := ioutil.WriteFile("/apachebel/test.html", []byte(data), 0644)
+	
 	check(er2)
 	// f, err := os.Create("test.html")
 	// _, err2 := f.WriteString(tmpl)
