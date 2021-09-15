@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"strconv"
 )
 
 type objGetAllModules struct {
@@ -81,8 +82,8 @@ func GetAllModules(w http.ResponseWriter, r *http.Request, project string) Proje
 	
 	fmt.Println("****************************************************************")
 	fmt.Println("Project: " + project)
-	fmt.Println("FrontEnd Artifacts: " + string(len(ObjFront.Projects)))
-	fmt.Println("BackEnd Artifacts: ", string(len(ObjBack.Projects))) 
+	fmt.Println("FrontEnd Artifacts: " + strconv.Itoa(len(ObjFront.Projects)))
+	fmt.Println("BackEnd Artifacts: " + strconv.Itoa(len(ObjBack.Projects))) 
 
 	return ProjectListModules{Back: ObjBack, Front: ObjFront}
 }
