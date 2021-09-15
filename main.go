@@ -34,21 +34,25 @@ func testHandler(w http.ResponseWriter, r *http.Request) {
 func getAllModules(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Params:", r.URL.Query())
 
-	param1 := r.URL.Query().Get("project")
-  if param1 != "" {
+	paramProject := r.URL.Query().Get("project")
+	paramBranch := r.URL.Query().Get("branch")
+  if paramProject == "" {
+    fmt.Println("No proporciono el parametro PROJECT")
+  }
+  if paramBranch == "" {
     fmt.Println("No proporciono el parametro PROJECT")
   }
 
-  xx := sonarqube.GetAllModules(w, r, param1)
+  xx := sonarqube.GetAllModules(w, r, paramProject)
 	var ff sonarqube.MetricsComponentList
 	var bb sonarqube.MetricsComponentList
-	
+
 	for _, element := range xx.Front.Projects {
-		ff.Components = append(ff.Components, sonarqube.GetMetrics(w, r, element.Key))
+		ff.Components = append(ff.Components, sonarqube.GetMetrics(w, r, element.Key, paramBranch))
 	}
 
 	for _, element := range xx.Back.Projects {
-		bb.Components = append(bb.Components, sonarqube.GetMetrics(w, r, element.Key))
+		bb.Components = append(bb.Components, sonarqube.GetMetrics(w, r, element.Key, paramBranch))
 	}
 
 	dat, err := ioutil.ReadFile("html/template.html")
@@ -147,3 +151,6 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
 	// _, err2 := f.WriteString(tmpl)
 	fmt.Fprint(w, "READY")
 }
+
+
+//laisa04@cwpanama.net     

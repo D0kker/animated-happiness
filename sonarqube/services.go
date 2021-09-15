@@ -78,9 +78,11 @@ func GetAllModules(w http.ResponseWriter, r *http.Request, project string) Proje
 			i = i + 1
 		}
 	}
-
-	fmt.Println(len(ObjFront.Projects))
-	fmt.Println(len(ObjBack.Projects))
+	
+	fmt.Println("****************************************************************")
+	fmt.Println("Project: " + project)
+	fmt.Println("FrontEnd Artifacts: " + len(ObjFront.Projects))
+	fmt.Println("BackEnd Artifacts: " + len(ObjBack.Projects))
 
 	return ProjectListModules{Back: ObjBack, Front: ObjFront}
 }

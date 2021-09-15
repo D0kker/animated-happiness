@@ -44,10 +44,10 @@ type MetricsComponentList struct {
 	Components []MetricsComponent
 }
 
-func GetMetrics(w http.ResponseWriter, r *http.Request, projectKey string) MetricsComponent {
+func GetMetrics(w http.ResponseWriter, r *http.Request, projectKey string, paramBranch string) MetricsComponent {
 	var bird MetricsComponent
 	metrics := "ncloc,complexity,violations,files,coverage,code_smells,bugs,vulnerabilities,cognitive_complexity,functions,tests"
-	route := fmt.Sprintf("http://devops/sonar/api/measures/component?additionalFields=period,metrics&branch=master&component=%s&metricKeys=%s", projectKey, metrics)
+	route := fmt.Sprintf("http://devops/sonar/api/measures/component?additionalFields=period,metrics&branch=%s&component=%s&metricKeys=%s", paramBranch, projectKey, metrics)
 
 	client := &http.Client{}
 	req, _ := http.NewRequest("GET", route, nil)
