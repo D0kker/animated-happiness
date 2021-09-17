@@ -134,15 +134,17 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
 		sonar_measures += fmt.Sprintf("<tr> <td class='text-left'>%v</td> <td class='text-left'>%v</td> <td class='text-right'>%v</td><td class='text-right'>%v</td><td class='text-right'>%v</td><td class='text-right'>%v</td>		<td class='text-right'>%v</td>		<td class='text-right'>%v</td></tr>", index+1, element.Component.Name, files, test, coverage, codeSmells, bugs, vulnerabilities)
 
 		parsedFunctions, _ := strconv.Atoi(functions)
+		parsedcognitiveComplexity, _ := strconv.Atoi(cognitiveComplexity)
+		parsedcomplexity, _ := strconv.Atoi(complexity)
 
 		var complexityAVG float64
 		if complexityAVG = 0; parsedFunctions > 0 {
-			complexityAVG = strconv.Atoi(complexity)/parsedFunctions
+			complexityAVG = float64(parsedcomplexity)/float64(parsedFunctions)
 		}
 
-		var cognitiveComplexityAVG float64
+		 var cognitiveComplexityAVG float64
 		if cognitiveComplexityAVG = 0; parsedFunctions > 0 {
-		  cognitiveComplexityAVG = strconv.Atoi(cognitiveComplexity)/parsedFunctions
+		  cognitiveComplexityAVG = float64(parsedcognitiveComplexity)/float64(parsedFunctions)
 		}
 
 		sonar_complexities += fmt.Sprintf("<tr> <td class='text-left'>%v</td> <td class='text-left'>%v</td> <td class='text-right'>%v</td><td class='text-right'>%v</td><td class='text-right'>%v</td>		<td class='text-right'>%v</td>		<td class='text-right'>%v</td></tr>", index+1, element.Component.Name, functions, complexity, complexityAVG, cognitiveComplexity, cognitiveComplexityAVG)
