@@ -132,10 +132,20 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 		sonar_measures += fmt.Sprintf("<tr> <td class='text-left'>%v</td> <td class='text-left'>%v</td> <td class='text-right'>%v</td><td class='text-right'>%v</td><td class='text-right'>%v</td><td class='text-right'>%v</td>		<td class='text-right'>%v</td>		<td class='text-right'>%v</td></tr>", index+1, element.Component.Name, files, test, coverage, codeSmells, bugs, vulnerabilities)
-		parsedComplexity, _ := strconv.Atoi(complexity)
+
 		parsedFunctions, _ := strconv.Atoi(functions)
-		parsedCognitiveComplexity, _ := strconv.Atoi(cognitiveComplexity)
-		sonar_complexities += fmt.Sprintf("<tr> <td class='text-left'>%v</td> <td class='text-left'>%v</td> <td class='text-right'>%v</td><td class='text-right'>%v</td><td class='text-right'>%v</td>		<td class='text-right'>%v</td>		<td class='text-right'>%v</td></tr>", index+1, element.Component.Name, functions, complexity, parsedComplexity/parsedFunctions, cognitiveComplexity, parsedCognitiveComplexity/parsedFunctions)
+
+		var complexityAVG float64
+		if complexityAVG = 0; parsedFunctions > 0 {
+			complexityAVG = strconv.Atoi(complexity)/parsedFunctions
+		}
+
+		var cognitiveComplexityAVG float64
+		if cognitiveComplexityAVG = 0; parsedFunctions > 0 {
+		  cognitiveComplexityAVG = strconv.Atoi(cognitiveComplexity)/parsedFunctions
+		}
+
+		sonar_complexities += fmt.Sprintf("<tr> <td class='text-left'>%v</td> <td class='text-left'>%v</td> <td class='text-right'>%v</td><td class='text-right'>%v</td><td class='text-right'>%v</td>		<td class='text-right'>%v</td>		<td class='text-right'>%v</td></tr>", index+1, element.Component.Name, functions, complexity, complexityAVG, cognitiveComplexity, cognitiveComplexityAVG)
 	}
 
 	sonar_measuresT := fmt.Sprintf("<th class='text-right'>%v</th>	<th class='text-right'>%v</th>	<th class='text-right'>%.2f</th>	<th class='text-right'>%v</th>	<th class='text-right'>%v</th>	<th class='text-right'>%v</th>", filesT, testT, coverageT/float64(total), codeSmellsT, bugsT, vulnerabilitiesT)
@@ -150,8 +160,7 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
 	er2 := ioutil.WriteFile("/apachebel/test.html", []byte(data), 0644)
 
 	check(er2)
-	// f, err := os.Create("test.html")
-	// _, err2 := f.WriteString(tmpl)
+
 	fmt.Fprint(w, "READY")
 }
 
