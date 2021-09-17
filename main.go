@@ -36,14 +36,14 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
 
 	paramProject := r.URL.Query().Get("project")
 	paramBranch := r.URL.Query().Get("branch")
-  if paramProject == "" {
-    fmt.Println("No proporciono el parametro PROJECT")
-  }
-  if paramBranch == "" {
-    fmt.Println("No proporciono el parametro BRANCH")
-  }
+	if paramProject == "" {
+		fmt.Println("No proporciono el parametro PROJECT")
+	}
+	if paramBranch == "" {
+		fmt.Println("No proporciono el parametro BRANCH")
+	}
 
-  xx := sonarqube.GetAllModules(w, r, paramProject)
+	xx := sonarqube.GetAllModules(w, r, paramProject)
 	var ff sonarqube.MetricsComponentList
 	var bb sonarqube.MetricsComponentList
 
@@ -132,13 +132,15 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 		sonar_measures += fmt.Sprintf("<tr> <td class='text-left'>%v</td> <td class='text-left'>%v</td> <td class='text-right'>%v</td><td class='text-right'>%v</td><td class='text-right'>%v</td><td class='text-right'>%v</td>		<td class='text-right'>%v</td>		<td class='text-right'>%v</td></tr>", index+1, element.Component.Name, files, test, coverage, codeSmells, bugs, vulnerabilities)
-
-		sonar_complexities += fmt.Sprintf("<tr> <td class='text-left'>%v</td> <td class='text-left'>%v</td> <td class='text-right'>%v</td><td class='text-right'>%v</td><td class='text-right'>%v</td>		<td class='text-right'>%v</td>		<td class='text-right'>%v</td></tr>", index+1, element.Component.Name, functions, complexity, complexity/functions, cognitiveComplexity, cognitiveComplexity/functions)
+		parsedComplexity, _ := strconv.Atoi(complexity)
+		parsedFunctions, _ := strconv.Atoi(functions)
+		parsedCognitiveComplexity, _ := strconv.Atoi(cognitiveComplexity)
+		sonar_complexities += fmt.Sprintf("<tr> <td class='text-left'>%v</td> <td class='text-left'>%v</td> <td class='text-right'>%v</td><td class='text-right'>%v</td><td class='text-right'>%v</td>		<td class='text-right'>%v</td>		<td class='text-right'>%v</td></tr>", index+1, element.Component.Name, functions, complexity, parsedComplexity/parsedFunctions, cognitiveComplexity, parsedCognitiveComplexity/parsedFunctions)
 	}
 
 	sonar_measuresT := fmt.Sprintf("<th class='text-right'>%v</th>	<th class='text-right'>%v</th>	<th class='text-right'>%.2f</th>	<th class='text-right'>%v</th>	<th class='text-right'>%v</th>	<th class='text-right'>%v</th>", filesT, testT, coverageT/float64(total), codeSmellsT, bugsT, vulnerabilitiesT)
 
-	sonar_complexitiesT := fmt.Sprintf("<th class='text-right'>%v</th>	<th class='text-right'>%v</th>	<th class='text-right'>%.2f</th>	<th class='text-right'>%v</th>	<th class='text-right'>%v</th>", functionsT, complexityT, complexityT/functionsT, cognitiveComplexityT, cognitiveComplexityT/functionsT)
+	sonar_complexitiesT := fmt.Sprintf("<th class='text-right'>%v</th>	<th class='text-right'>%v</th>	<th class='text-right'>%d</th>	<th class='text-right'>%v</th>	<th class='text-right'>%d</th>", functionsT, complexityT, complexityT/functionsT, cognitiveComplexityT, cognitiveComplexityT/functionsT)
 
 	data = strings.ReplaceAll(data, "{{sonar_measures_rows}}", sonar_measures)
 	data = strings.ReplaceAll(data, "{{sonar_measures}}", sonar_measuresT)
@@ -146,12 +148,11 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
 	data = strings.ReplaceAll(data, "{{sonar_complexities}}", sonar_complexitiesT)
 
 	er2 := ioutil.WriteFile("/apachebel/test.html", []byte(data), 0644)
-	
+
 	check(er2)
 	// f, err := os.Create("test.html")
 	// _, err2 := f.WriteString(tmpl)
 	fmt.Fprint(w, "READY")
 }
 
-
-//laisa04@cwpanama.net     
+//laisa04@cwpanama.net
