@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+	"math"
 )
 
 func check(e error) {
@@ -140,11 +141,13 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
 		var complexityAVG float64
 		if complexityAVG = 0; parsedFunctions > 0 {
 			complexityAVG = float64(parsedcomplexity)/float64(parsedFunctions)
+			complexityAVG = math.Round(complexityAVG)
 		}
 
 		 var cognitiveComplexityAVG float64
 		if cognitiveComplexityAVG = 0; parsedFunctions > 0 {
 		  cognitiveComplexityAVG = float64(parsedcognitiveComplexity)/float64(parsedFunctions)
+			cognitiveComplexityAVG = math.Round(cognitiveComplexityAVG)
 		}
 
 		sonar_complexities += fmt.Sprintf("<tr> <td class='text-left'>%v</td> <td class='text-left'>%v</td> <td class='text-right'>%v</td><td class='text-right'>%v</td><td class='text-right'>%v</td>		<td class='text-right'>%v</td>		<td class='text-right'>%v</td></tr>", index+1, element.Component.Name, functions, complexity, complexityAVG, cognitiveComplexity, cognitiveComplexityAVG)
