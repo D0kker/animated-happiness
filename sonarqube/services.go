@@ -6,8 +6,9 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"strings"
+	"sort"
 	"strconv"
+	"strings"
 )
 
 type objGetAllModules struct {
@@ -62,7 +63,7 @@ func GetAllModules(w http.ResponseWriter, r *http.Request, project string) Proje
 
 		json.Unmarshal([]byte(responseData), &bird)
 		for _, element := range bird.Components {
-			if strings.Contains(element.Key, project + ":") {
+			if strings.Contains(element.Key, project+":") {
 				item1 := Components{Key: element.Key, Name: element.Name, Qualifier: element.Qualifier, Project: element.Project}
 				if strings.Contains(element.Key, ":lrf:") {
 					ObjFront.AddItem(item1)
@@ -79,14 +80,21 @@ func GetAllModules(w http.ResponseWriter, r *http.Request, project string) Proje
 			i = i + 1
 		}
 	}
-	
+
 	fmt.Println("****************************************************************")
 	fmt.Println("Project: " + project)
 	fmt.Println("FrontEnd Artifacts: " + strconv.Itoa(len(ObjFront.Projects)))
-	fmt.Println("BackEnd Artifacts: " + strconv.Itoa(len(ObjBack.Projects))) 
+	fmt.Println("BackEnd Artifacts: " + strconv.Itoa(len(ObjBack.Projects)))
+
+	sort.SliceStable(ObjBack.Projects, func(i, j int) bool {
+		return ObjBack.Projects[i].Name < ObjBack.Projects[j].Name
+	})
+	sort.SliceStable(ObjFront.Projects, func(i, j int) bool {
+		return ObjFront.Projects[i].Name < ObjFront.Projects[j].Name
+	})
 
 	return ProjectListModules{
-		Back: sort.Strings(ObjBack), 
-		Front: sort.Strings(ObjFront)
+		Back:  ObjBack,
+		Front: ObjFront,
 	}
 }
