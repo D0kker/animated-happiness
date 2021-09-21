@@ -64,7 +64,12 @@ func GetAllModules(w http.ResponseWriter, r *http.Request, project string) Proje
 		json.Unmarshal([]byte(responseData), &bird)
 		for _, element := range bird.Components {
 			if strings.Contains(element.Key, project+":") {
-				item1 := Components{Key: element.Key, Name: element.Name, Qualifier: element.Qualifier, Project: element.Project}
+				item1 := Components{
+					Key: element.Key, 
+					Name: element.Name, 
+					Qualifier: element.Qualifier, 
+					Project: element.Project}
+					
 				if strings.Contains(element.Key, ":lrf:") {
 					ObjFront.AddItem(item1)
 				}
