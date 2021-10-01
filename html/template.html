@@ -79,7 +79,7 @@
             <tfoot class="bg-secondary text-light font-weight-bold">
               <tr>
                 <td colspan="2">Total</td>
-                {{sonar_measures}}
+                {{sonar_measures_BB}}
                 <!-- <th class="text-right">{{sonar_measures_total_files}}</th>
                 <th class="text-right">{{sonar_measures_total_coverage}}</th>
                 <th class="text-right">{{sonar_measures_total_code_smells}}</th>
@@ -88,7 +88,7 @@
               </tr>
             </tfoot>
     
-            <tbody>{{sonar_measures_rows}}</tbody>
+            <tbody>{{sonar_measures_rows_BB}}</tbody>
           </table>
     
           <h2 class="mt-5">SonarQube - Complejidades</h2>
@@ -109,11 +109,11 @@
             <tfoot class="bg-secondary text-light font-weight-bold">
               <tr>
                 <td colspan="2">Total</td>
-                {{sonar_complexities}}
+                {{sonar_complexities_BB}}
               </tr>
             </tfoot>
     
-            <tbody>{{sonar_complexities_rows}}</tbody>
+            <tbody>{{sonar_complexities_rows_BB}}</tbody>
           </table></div>
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
           <h2 class="mt-5">SonarQube - Medidas</h2>
@@ -135,11 +135,11 @@
             <tfoot class="bg-secondary text-light font-weight-bold">
               <tr>
                 <td colspan="2">Total</td>
-                {{sonar_measures}}
+                {{sonar_measures_FF}}
               </tr>
             </tfoot>
     
-            <tbody>{{sonar_measures_rows}}</tbody>
+            <tbody>{{sonar_measures_rows_FF}}</tbody>
           </table>
         </div>
       </div>
