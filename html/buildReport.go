@@ -107,13 +107,13 @@ func getData(xx sonarqube.MetricsComponentList, pp sonarqube.ProjectListModules)
 		var complexityAVG float64
 		if complexityAVG = 0; parsedFunctions > 0 {
 			complexityAVG = float64(parsedcomplexity)/float64(parsedFunctions)
-			complexityAVG = math.Round(complexityAVG)
+			//complexityAVG = math.Round(complexityAVG)
 		}
 
 		var cognitiveComplexityAVG float64
 		if cognitiveComplexityAVG = 0; parsedFunctions > 0 {
 		  cognitiveComplexityAVG = float64(parsedcognitiveComplexity)/float64(parsedFunctions)
-			cognitiveComplexityAVG = math.Round(cognitiveComplexityAVG)
+			//cognitiveComplexityAVG = math.Round(cognitiveComplexityAVG)
 		}
 
 		sonar_complexities += fmt.Sprintf("<tr> <td class='text-left'>%v</td> <td class='text-left'>%v</td> <td class='text-right'>%v</td><td class='text-right'>%v</td><td class='text-right'>%.2f</td>		<td class='text-right'>%v</td>		<td class='text-right'>%.2f</td></tr>", index+1, element.Component.Name, functions, complexity, complexityAVG, cognitiveComplexity, cognitiveComplexityAVG)
@@ -128,13 +128,13 @@ func getData(xx sonarqube.MetricsComponentList, pp sonarqube.ProjectListModules)
 	var complexityTAVG float64
 	if complexityTAVG = 0; functionsT > 0 {
 		complexityTAVG = float64(complexityT)/float64(functionsT)
-		complexityTAVG = math.Round(complexityTAVG)
+		//complexityTAVG = math.Round(complexityTAVG)
 	}
 
 	var cognitiveComplexityTAVG float64
 	if cognitiveComplexityTAVG = 0; functionsT > 0 {
 		cognitiveComplexityTAVG = float64(cognitiveComplexityT)/float64(functionsT)
-		cognitiveComplexityTAVG = math.Round(cognitiveComplexityTAVG)
+		//cognitiveComplexityTAVG = math.Round(cognitiveComplexityTAVG)
 	}
 
 	sonar_complexitiesT := fmt.Sprintf("<th class='text-right'>%v</th>	<th class='text-right'>%v</th>	<th class='text-right'>%.2f</th>	<th class='text-right'>%v</th>	<th class='text-right'>%.2f</th>", functionsT, complexityT, complexityTAVG, cognitiveComplexityT, cognitiveComplexityTAVG)
