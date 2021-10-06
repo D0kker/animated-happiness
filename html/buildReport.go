@@ -121,7 +121,23 @@ func getData(xx sonarqube.MetricsComponentList, pp sonarqube.ProjectListModules)
 
 	sonar_measuresT := fmt.Sprintf("<th class='text-right'>%v</th>	<th class='text-right'>%v</th>	<th class='text-right'>%.2f</th>	<th class='text-right'>%v</th>	<th class='text-right'>%v</th>	<th class='text-right'>%v</th>", filesT, testT, coverageT/float64(total), codeSmellsT, bugsT, vulnerabilitiesT)
 
-	sonar_complexitiesT := fmt.Sprintf("<th class='text-right'>%v</th>	<th class='text-right'>%v</th>	<th class='text-right'>%d</th>	<th class='text-right'>%v</th>	<th class='text-right'>%d</th>", functionsT, complexityT, complexityT/functionsT, cognitiveComplexityT, cognitiveComplexityT/functionsT)
+	//parsedFunctionsT, _ := functionsT
+	// parsedcognitiveComplexityT, _ := strconv.Atoi(cognitiveComplexityT)
+	// parsedcomplexityT, _ := strconv.Atoi(complexityT)
+
+	var complexityTAVG float64
+	if complexityTAVG = 0; functionsT > 0 {
+		complexityTAVG = float64(complexityT)/float64(functionsT)
+		complexityTAVG = math.Round(complexityTAVG)
+	}
+
+	var cognitiveComplexityTAVG float64
+	if cognitiveComplexityTAVG = 0; functionsT > 0 {
+		cognitiveComplexityTAVG = float64(cognitiveComplexityT)/float64(functionsT)
+		cognitiveComplexityTAVG = math.Round(cognitiveComplexityTAVG)
+	}
+
+	sonar_complexitiesT := fmt.Sprintf("<th class='text-right'>%v</th>	<th class='text-right'>%v</th>	<th class='text-right'>%d</th>	<th class='text-right'>%v</th>	<th class='text-right'>%d</th>", functionsT, complexityT, complexityTAVG, cognitiveComplexityT, cognitiveComplexityTAVG)
 
 	return htmlDataStruct{
 		sonar_measures: sonar_measures,
