@@ -8,6 +8,8 @@ import (
 	"log"
 	"net/http"
 	"time"
+  "os"
+  "path/filepath"
 )
 
 func check(e error) {
@@ -74,6 +76,10 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
 
 	t := time.Now()
 	concatenated := fmt.Sprint("/apachebel/", dir, t.Year(), "-", int(t.Month()), "/report.html")
+
+	newpath := filepath.Dir(concatenated)
+	err = os.MkdirAll(newpath, os.ModePerm)
+
 	er2 := ioutil.WriteFile(concatenated, []byte(dataHtml), 0644)
 
 	check(er2)
