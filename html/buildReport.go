@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 	"strconv"
-	"math"
+	//"math"
 )
 
 type htmlDataStruct struct {
@@ -116,10 +116,10 @@ func getData(xx sonarqube.MetricsComponentList, pp sonarqube.ProjectListModules)
 			//cognitiveComplexityAVG = math.Round(cognitiveComplexityAVG)
 		}
 
-		sonar_complexities += fmt.Sprintf("<tr> <td class='text-left'>%v</td> <td class='text-left'>%v</td> <td class='text-right'>%v</td><td class='text-right'>%v</td><td class='text-right'>%.2f</td>		<td class='text-right'>%v</td>		<td class='text-right'>%.2f</td></tr>", index+1, element.Component.Name, functions, complexity, complexityAVG, cognitiveComplexity, cognitiveComplexityAVG)
+		sonar_complexities += fmt.Sprintf("<tr> <td class='text-left'>%v</td> <td class='text-left'>%v</td> <td class='text-right'>%v</td><td class='text-right'>%v</td><td class='text-right'>%f</td>		<td class='text-right'>%v</td>		<td class='text-right'>%f</td></tr>", index+1, element.Component.Name, functions, complexity, complexityAVG, cognitiveComplexity, cognitiveComplexityAVG)
 	}
 
-	sonar_measuresT := fmt.Sprintf("<th class='text-right'>%v</th>	<th class='text-right'>%v</th>	<th class='text-right'>%.2f</th>	<th class='text-right'>%v</th>	<th class='text-right'>%v</th>	<th class='text-right'>%v</th>", filesT, testT, coverageT/float64(total), codeSmellsT, bugsT, vulnerabilitiesT)
+	sonar_measuresT := fmt.Sprintf("<th class='text-right'>%v</th>	<th class='text-right'>%v</th>	<th class='text-right'>%f</th>	<th class='text-right'>%v</th>	<th class='text-right'>%v</th>	<th class='text-right'>%v</th>", filesT, testT, coverageT/float64(total), codeSmellsT, bugsT, vulnerabilitiesT)
 
 	//parsedFunctionsT, _ := functionsT
 	// parsedcognitiveComplexityT, _ := strconv.Atoi(cognitiveComplexityT)
