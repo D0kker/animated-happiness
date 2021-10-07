@@ -73,11 +73,14 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
 		name = "Banca en Linea Comercial"
 	}
 
-	dataHtml := html.CreateHome(string(dat), xx, name)
+	t := time.Now()
+	
+	date := fmt.Sprint(t.Day(), "/", int(t.Month()), "/" t.Year())
+
+	dataHtml := html.CreateHome(string(dat), xx, name, date)
 	dataHtml = html.CreateBackend(dataHtml, bb, xx)
 	dataHtml = html.CreateFrontend(dataHtml, ff, xx)
 
-	t := time.Now()
 	concatenated := fmt.Sprint("/apachebel/", dir, t.Year(), "-", int(t.Month()), "/report.html")
 
 	newpath := filepath.Dir(concatenated)

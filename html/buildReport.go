@@ -15,12 +15,13 @@ type htmlDataStruct struct {
 	sonar_complexitiesT   string
 }
 
-func CreateHome(htmlData string, xx sonarqube.ProjectListModules, name string) string {
+func CreateHome(htmlData string, xx sonarqube.ProjectListModules, name string, date string) string {
   htmlData = strings.ReplaceAll(string(htmlData), "{{mod_front}}", fmt.Sprint(len(xx.Front.Projects)))
 	htmlData = strings.ReplaceAll(htmlData, "{{mod_back}}", fmt.Sprint(len(xx.Back.Projects)))
 	total := (len(xx.Back.Projects) + len(xx.Front.Projects))
 	htmlData = strings.ReplaceAll(htmlData, "{{mod_total}}", fmt.Sprint(total))
 	htmlData = strings.ReplaceAll(htmlData, "{{title}}", name)
+	htmlData = strings.ReplaceAll(htmlData, "{{date}}", date)
 	return htmlData
 }
 
