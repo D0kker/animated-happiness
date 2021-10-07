@@ -23,7 +23,7 @@ func main() {
 	port := 1515
 
 	http.HandleFunc("/test", testHandler)
-	http.HandleFunc("/getAllModules", getAllModules)
+	http.HandleFunc("/getMetricReport", getAllModules)
 	http.HandleFunc("/metricsDaily", getAllModules)
 	http.HandleFunc("/metricsMonthly", getAllModules)
 
