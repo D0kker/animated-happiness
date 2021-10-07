@@ -62,17 +62,20 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
 	dat, err := ioutil.ReadFile("html/template.html")
 	check(err)
 
-	dataHtml := html.CreateHome(string(dat), xx)
-	dataHtml = html.CreateBackend(dataHtml, bb, xx)
-	dataHtml = html.CreateFrontend(dataHtml, ff, xx)
-
 	var dir = ""
+	var name = ""
 	if (paramProject == "bel")	{
 		dir = "bel-personal/metrics/"
+		name = "Banca en Linea Personal"
 	}
 	if (paramProject == "belcom")	{
 		dir = "bel-comercial/metrics/"
+		name = "Banca en Linea Comercial"
 	}
+
+	dataHtml := html.CreateHome(string(dat), xx, name)
+	dataHtml = html.CreateBackend(dataHtml, bb, xx)
+	dataHtml = html.CreateFrontend(dataHtml, ff, xx)
 
 	t := time.Now()
 	concatenated := fmt.Sprint("/apachebel/", dir, t.Year(), "-", int(t.Month()), "/report.html")
