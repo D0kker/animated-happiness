@@ -64,6 +64,7 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
 
 	var dir = ""
 	var name = ""
+	var reportName = "-report.html"
 	if (paramProject == "bel")	{
 		dir = "bel-personal/metrics/"
 		name = "Banca en Linea Personal"
@@ -72,16 +73,19 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
 		dir = "bel-comercial/metrics/"
 		name = "Banca en Linea Comercial"
 	}
+	if (paramBranch == "master")	{
+		reportName = "-master-report.html"
+	}
 
 	t := time.Now()
+
+	concatenated := fmt.Sprint("/apachebel/", dir, t.Year(), "-", int(t.Month()), "/", t.Day(), reportName)
 	
 	date := fmt.Sprint(t.Day(), "/", int(t.Month()), "/", t.Year())
 
 	dataHtml := html.CreateHome(string(dat), xx, name, date)
 	dataHtml = html.CreateBackend(dataHtml, bb, xx)
 	dataHtml = html.CreateFrontend(dataHtml, ff, xx)
-
-	concatenated := fmt.Sprint("/apachebel/", dir, t.Year(), "-", int(t.Month()), "/report.html")
 
 	newpath := filepath.Dir(concatenated)
 	err = os.MkdirAll(newpath, os.ModePerm)
