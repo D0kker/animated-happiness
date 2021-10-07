@@ -75,7 +75,7 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
 
 	t := time.Now()
 	
-	date := fmt.Sprint(t.Day(), "/", int(t.Month()), "/" t.Year())
+	date := fmt.Sprint(t.Day(), "/", int(t.Month()), "/", t.Year())
 
 	dataHtml := html.CreateHome(string(dat), xx, name, date)
 	dataHtml = html.CreateBackend(dataHtml, bb, xx)
