@@ -54,6 +54,7 @@ func GetAllModules(w http.ResponseWriter, r *http.Request, project string) Proje
 		client := &http.Client{}
 		req, _ := http.NewRequest("GET", route, nil)
 		req.Header.Set("Authorization", "Basic NTY5NGVhN2JmMDA1ZDFiYjM4ZTk4ZjkyMzRmOGI4MGMwODg1MzE0NDo=")
+		req.Header.Set("Authorization", "Basic ZmQxMTU5MGFmZDIyMDQ3Y2YzNzhjYjczYWMzYmJlYzAzOTNjMWZjMQ==")
 		res, _ := client.Do(req)
 		responseData, err := ioutil.ReadAll(res.Body)
 
