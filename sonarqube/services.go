@@ -52,12 +52,14 @@ func GetAllModules(w http.ResponseWriter, r *http.Request, project string) Proje
 		route := fmt.Sprintf("http://devops/sonar/api/components/search?ps=500&qualifiers=TRK&p=%v", i)
 
 		client := &http.Client{}
-		req, _ := http.NewRequest("GET", route, nil)
-		req.Header.Set("Authorization", "Basic NTY5NGVhN2JmMDA1ZDFiYjM4ZTk4ZjkyMzRmOGI4MGMwODg1MzE0NDo=")
+		req, e := http.NewRequest("GET", route, nil)
 		req.Header.Set("Authorization", "Basic ZmQxMTU5MGFmZDIyMDQ3Y2YzNzhjYjczYWMzYmJlYzAzOTNjMWZjMQ==")
-		res, _ := client.Do(req)
+		res, e := client.Do(req)
 		responseData, err := ioutil.ReadAll(res.Body)
 
+		if e != nil {
+			log.Fatal(e)
+		}
 		if err != nil {
 			log.Fatal(err)
 		}
