@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strings"
 )
 
 type MetricsComponent struct {
@@ -45,13 +46,14 @@ type MetricsComponentList struct {
 }
 
 func GetMetrics(w http.ResponseWriter, r *http.Request, projectKey string, paramBranch string) MetricsComponent {
+	//fmt.Println(projectKey)
 	var bird MetricsComponent
 	metrics := "ncloc,complexity,violations,files,coverage,code_smells,bugs,vulnerabilities,cognitive_complexity,functions,tests"
 	route := fmt.Sprintf("http://devops/sonar/api/measures/component?additionalFields=period,metrics&branch=%s&component=%s&metricKeys=%s", paramBranch, projectKey, metrics)
 
 	client := &http.Client{}
 	req, _ := http.NewRequest("GET", route, nil)
-	req.Header.Set("Authorization", "Basic NTY5NGVhN2JmMDA1ZDFiYjM4ZTk4ZjkyMzRmOGI4MGMwODg1MzE0NDo=")
+	req.Header.Set("Authorization", "Basic ZmQxMTU5MGFmZDIyMDQ3Y2YzNzhjYjczYWMzYmJlYzAzOTNjMWZjMTo=")
 	res, _ := client.Do(req)
 	responseData, err := ioutil.ReadAll(res.Body)
 
@@ -59,8 +61,11 @@ func GetMetrics(w http.ResponseWriter, r *http.Request, projectKey string, param
 		log.Fatal(err)
 	}
 
+	if !strings.Contains(string(responseData), "errors"){
+		json.Unmarshal([]byte(responseData), &bird)
+	}
 	//fmt.Fprint(w, string(responseData))
-	json.Unmarshal([]byte(responseData), &bird)
+	//fmt.Println(string(responseData))
 
 	return bird
 }

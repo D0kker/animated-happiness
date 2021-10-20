@@ -71,8 +71,7 @@ func GetAllModules(w http.ResponseWriter, r *http.Request, project string) Proje
 					Key: element.Key, 
 					Name: element.Name, 
 					Qualifier: element.Qualifier, 
-					Project: element.Project}
-					
+					Project: element.Project}					
 				if strings.Contains(element.Key, ":lrf:") {
 					ObjFront.AddItem(item1)
 				}

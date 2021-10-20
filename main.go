@@ -90,7 +90,8 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
 	newpath := filepath.Dir(concatenated)
 	err = os.MkdirAll(newpath, os.ModePerm)
 
-	er2 := ioutil.WriteFile(concatenated, []byte(dataHtml), 0644)
+	//er2 := ioutil.WriteFile(concatenated, []byte(dataHtml), 0644)
+	er2 := ioutil.WriteFile("report.html", []byte(dataHtml), 0644)
 
 	check(er2)
 
