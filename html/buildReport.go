@@ -128,7 +128,7 @@ func getDataFF(xx sonarqube.MetricsComponentList, pp sonarqube.ProjectListModule
 			}
 		}
 
-		sonar_measures += fmt.Sprintf("<tr>		<td class='text-left'>%v</td>		<td class='text-left'>%v</td>		<td class='text-right'>%v</td>		<td class='text-right'>%v</td>		<td class='text-right'>%v</td>		<td class='text-right'>%v</td>		</tr>", index+1, element.Component.Name, files, test, coverage, codeSmells, bugs, vulnerabilities)
+		sonar_measures += fmt.Sprintf("<tr>		<td class='text-left'>%v</td>		<td class='text-left'>%v</td>		<td class='text-right'>%v</td>		<td class='text-right'>%v</td>		<td class='text-right'>%v</td>		<td class='text-right'>%v</td>		</tr>", index+1, element.Component.Name, files, codeSmells, bugs, vulnerabilities)
 	}
 
 	sonar_measuresT := fmt.Sprintf("	<th class='text-right'>%v</th>	<th class='text-right'>%v</th>	<th class='text-right'>%v</th>	<th class='text-right'>%v</th>", filesT, codeSmellsT, bugsT, vulnerabilitiesT)
