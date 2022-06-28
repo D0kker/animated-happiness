@@ -51,10 +51,13 @@ func GetMetrics(w http.ResponseWriter, r *http.Request, projectKey string, param
 	metrics := "ncloc,complexity,violations,files,coverage,code_smells,bugs,vulnerabilities,cognitive_complexity,functions,tests"
 	route := fmt.Sprintf("http://devops/sonar/api/measures/component?additionalFields=period,metrics&branch=%s&component=%s&metricKeys=%s", paramBranch, projectKey, metrics)
 
+	fmt.Println(route)
 	client := &http.Client{}
 	req, _ := http.NewRequest("GET", route, nil)
 	req.Header.Set("Authorization", "Basic ZmQxMTU5MGFmZDIyMDQ3Y2YzNzhjYjczYWMzYmJlYzAzOTNjMWZjMTo=")
+
 	res, _ := client.Do(req)
+
 	responseData, err := ioutil.ReadAll(res.Body)
 
 	if err != nil {

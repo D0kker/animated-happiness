@@ -1,7 +1,7 @@
 package html
 
 import (
-	"cualquier_vaina/sonarqube"
+	"metricsBel/sonarqube"
 	"fmt"
 	"strings"
 	"strconv"

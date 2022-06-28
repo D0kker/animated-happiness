@@ -1,3 +1,3 @@
-module cualquier_vaina
+module metricsBel
 
 go 1.16

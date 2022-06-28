@@ -1,8 +1,8 @@
 package main
 
 import (
-	"cualquier_vaina/sonarqube"
-	"cualquier_vaina/html"
+	"metricsBel/sonarqube"
+	"metricsBel/html"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -97,4 +97,3 @@ func getAllModules(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Fprint(w, "READY")
 }
-//laisa04@cwpanama.net

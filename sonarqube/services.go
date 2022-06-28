@@ -50,7 +50,7 @@ func GetAllModules(w http.ResponseWriter, r *http.Request, project string) Proje
 
 	for {
 		route := fmt.Sprintf("http://devops/sonar/api/components/search?ps=500&qualifiers=TRK&p=%v", i)
-
+		fmt.Println(route)
 		client := &http.Client{}
 		req, e := http.NewRequest("GET", route, nil)
 		req.Header.Set("Authorization", "Basic ZmQxMTU5MGFmZDIyMDQ3Y2YzNzhjYjczYWMzYmJlYzAzOTNjMWZjMTo=")
